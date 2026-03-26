@@ -1,0 +1,30 @@
+VERSION: 2
+_BASE_: "COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"
+
+MODEL:
+  ROI_HEADS:
+    NUM_CLASSES: 1
+    BATCH_SIZE_PER_IMAGE: 128
+  ANCHOR_GENERATOR:
+    SIZES: [[16], [32], [64], [128], [256]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+
+DATASETS:
+  TRAIN: ("msc01_train_ST",)
+  TEST: ("msc01_val_GT",)
+
+DATALOADER:
+  NUM_WORKERS: 2
+
+SOLVER:
+  IMS_PER_BATCH: 2
+  BASE_LR: 0.00025
+  MAX_ITER: 3000
+  STEPS: (2000, 2600)
+  GAMMA: 0.1
+  CHECKPOINT_PERIOD: 500
+
+TEST:
+  EVAL_PERIOD: 500
+
+OUTPUT_DIR: "/mnt/c/Users/ooluwadare/maskrcnn_ctc/outputs/msc_maskrcnn"
