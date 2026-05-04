@@ -2,130 +2,40 @@ VERSION: 2
 _BASE_: "base_maskrcnn_r50_fpn.yaml"
 
 DATASETS:
-  TRAIN: ("msc01_train_ST",)
-  TEST: ("msc01_val_GT",)
+    TRAIN: ("sim+01_train_01",)
+    TEST: ("SIM+01_val_02",)
 
 MODEL:
-  ROI_HEADS:
-    NUM_CLASSES: 1
-    BATCH_SIZE_PER_IMAGE: 128
+    ROI_HEADS:
+        NUM_CLASSES: 1
+        BATCH_SIZE_PER_IMAGE: 256
 
-  ANCHOR_GENERATOR:
-    SIZES: [[16], [32], [64], [128], [256]]
-    ASPECT_RATIOS: [[0.125, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0]]
+    ANCHOR_GENERATOR:
+        SIZES: [[16], [32], [64], [128], [256]]
+        ASPECT_RATIOS: [[0.125, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0]]
 
-  RPN:
-    PRE_NMS_TOPK_TRAIN: 2000
-    PRE_NMS_TOPK_TEST: 1000
-    POST_NMS_TOPK_TRAIN: 1000
-    POST_NMS_TOPK_TEST: 300
+    RPN:
+        PRE_NMS_TOPK_TRAIN: 4000
+        PRE_NMS_TOPK_TEST: 2000
+        POST_NMS_TOPK_TRAIN: 2000
+        POST_NMS_TOPK_TEST: 1000
 
-  ROI_MASK_HEAD:
-    POOLER_RESOLUTION: 14
+    ROI_MASK_HEAD:
+        POOLER_RESOLUTION: 28
 
 SOLVER:
-  IMS_PER_BATCH: 1
-  BASE_LR: 0.00025
-  MAX_ITER: 3000
-  STEPS: (2000, 2600)
-  GAMMA: 0.1
-  CHECKPOINT_PERIOD: 500
+    IMS_PER_BATCH: 2
+    BASE_LR: 0.00025
+    MAX_ITER: 7000
+    STEPS: (4000, 5200)
+    GAMMA: 0.1
+    CHECKPOINT_PERIOD: 1000
 
 TEST:
-  EVAL_PERIOD: 500
+    EVAL_PERIOD: 1000
+
 
 DATALOADER:
-  NUM_WORKERS: 2
+    NUM_WORKERS: 4
 
-OUTPUT_DIR: "/mnt/c/Users/ooluwadare/maskrcnn_ctc/outputs/msc_maskrcnn_anchor_tuned"
-# DATASETS:
-#   TRAIN: ("msc01_train_ST",)
-#   TEST: ("msc01_val_GT",)
-
-# MODEL:
-#   ROI_HEADS:
-#     NUM_CLASSES: 1
-
-
-
-# VERSION: 2
-# #_BASE_: "_base/mask_rcnn_R_50_FPN_3x.yaml"
-# _BASE_: "COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"
-
-# MODEL:
-#   ROI_HEADS:
-#     NUM_CLASSES: 1
-#     BATCH_SIZE_PER_IMAGE: 128
-#   ANCHOR_GENERATOR:
-#     SIZES: [[16], [32], [64], [128], [256]]
-#     ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
-
-# DATASETS:
-#   TRAIN: ("msc01_train_ST",)
-#   TEST: ("msc01_val_GT",)
-
-# DATALOADER:
-#   NUM_WORKERS: 2
-
-# SOLVER:
-#   IMS_PER_BATCH: 2
-#   BASE_LR: 0.00025
-#   MAX_ITER: 3000
-#   STEPS: (2000, 2600)
-#   GAMMA: 0.1
-#   CHECKPOINT_PERIOD: 500
-
-# TEST:
-#   EVAL_PERIOD: 500
-
-# OUTPUT_DIR: "/mnt/c/Users/ooluwadare/maskrcnn_ctc/outputs/msc_maskrcnn"
-
-
-
-
-# MODEL:
-#   META_ARCHITECTURE: "GeneralizedRCNN"
-#   MASK_ON: true
-#   WEIGHTS: ""   # we will set in code (model_zoo checkpoint)
-#   BACKBONE:
-#     NAME: "build_resnet_fpn_backbone"
-#   RESNETS:
-#     DEPTH: 50
-#     OUT_FEATURES: ["res2", "res3", "res4", "res5"]
-#   FPN:
-#   IN_FEATURES: ["res2", "res3", "res4", "res5"]
-#   ROI_HEADS:
-#     NUM_CLASSES: 1
-#     BATCH_SIZE_PER_IMAGE: 128
-#   ANCHOR_GENERATOR:
-#     SIZES: [[16], [32], [64], [128], [256]]
-#     ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
-
-# DATASETS:
-#   TRAIN: ("msc01_train_ST",)
-#   TEST: ("msc01_val_GT",)
-
-# DATALOADER:
-#   NUM_WORKERS: 2
-
-# SOLVER:
-#   IMS_PER_BATCH: 2
-#   BASE_LR: 0.00025
-#   MAX_ITER: 3000
-#   STEPS: (2000, 2600)
-#   GAMMA: 0.1
-#   CHECKPOINT_PERIOD: 500
-
-# TEST:
-#   EVAL_PERIOD: 500
-
-# INPUT:
-#   MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
-#   MAX_SIZE_TRAIN: 1333
-#   MIN_SIZE_TEST: 800
-#   MAX_SIZE_TEST: 1333
-
-# OUTPUT_DIR: "/mnt/c/Users/ooluwadare/maskrcnn_ctc/outputs/msc_maskrcnn"
-
-
-
+OUTPUT_DIR: "/mnt/c/Users/ooluwadare/maskrcnn_ctc/outputs/msc_maskrcnn_hero"
